@@ -1,0 +1,40 @@
+{
+  "name": "blog-project-by-oumar-yanni",
+  "version": "1.0.0",
+  "description": "I use all the latest JavaScript features to create a functional blog.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "start": "node startDevServer.js"
+  },
+  "keywords": [
+    "blog",
+    "vanilla",
+    "javascript",
+    "es14",
+    "html",
+    "css"
+  ],
+  "author": "Oumar Yanni",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.11",
+    "@babel/preset-env": "^7.22.10",
+    "babel-loader": "^9.1.3",
+    "core-js": "^3.32.1",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "regenerator-runtime": "^0.14.0",
+    "sass": "^1.66.1",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "portfinder": "^1.0.32"
+  }
+}
