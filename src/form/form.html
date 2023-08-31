@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Formulaire</title>
-</head>
-<body>
-  <a href="./index.html">Accueil</a>  
-</body>
+    <title>Oumar's Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:300,400,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="./index.html" class="header-brand" > Oumar's Blog</a>
+
+        <ul>
+            <li>
+                <a href="./index.html" class="header-nav">Accueil</a>
+            </li>
+            <li>
+                <a href="./form.html" class="header-nav active">Créer un article</a>
+            </li>
+        </ul>
+      </header>
+      <div class="content">
+        <form>
+            <h2 class="title-underline"> Ajouter un article</h2>
+            <div class="form-group">
+                <label>Auteur</label>
+                <input type="text" name="author" />
+            </div>
+            <div class="form-group">
+                <label>Catégorie</label>
+                <input type="text" name="category" />
+            </div>
+            <div class="form-group">
+                <label>Article</label>
+                <textarea name="content"></textarea>
+            </div>
+            <div class="form-btn-container">
+                <button class="btn btn-secondary">Annuler</button>
+                <button class="btn btn-primary">Sauvegarder</button>
+            </div>
+        </form>
+      </div>
+      <footer>© blog by <a href="https://www.linkedin.com/in/oumar-yanni/">Oumar Yanni</a></footer>
+    </div>
+  </body>
 </html>
