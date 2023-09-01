@@ -1,2 +1,46 @@
+import { async } from "regenerator-runtime";
 import "../assets/styles/styles.scss";
 import "./form.scss";
+
+
+const form = document.querySelector("form");
+const errorElement = document.querySelector("#errors");
+let errors = [];
+
+
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const article = Object.fromEntries(formData.entries());
+
+    if (formIsValid(article)) {
+        const json = JSON.stringify(article);
+        //make the request here
+    }
+});
+
+
+const formIsValid = article => {
+    errors = [];
+    if (
+        !article.author ||
+        !article.category ||
+        !article.content
+    ) {
+        errors.push("Vous devez renseigner tous les champs")
+    }
+    if (article.content.length < 20) {
+        errors.push("Le contenu de votre article est trop court !")
+    } 
+    if (errors.length) {
+        let errorHTML = "";
+        errors.forEach(e => {
+            errorHTML += `<li>${e}<li>`;
+        });
+        errorElement.innerHTML = errorHTML;
+        return false;
+    } else {
+        errorElement.innerHTML = "";
+        return true;
+    }
+};

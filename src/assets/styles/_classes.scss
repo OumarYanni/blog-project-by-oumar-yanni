@@ -5,6 +5,7 @@
     }
 }
 
+
 .btn {
     border: 0;
     border-radius: 3px;
@@ -24,5 +25,12 @@
         border: 1px solid var(--primary);
         background: white;
         color: var(--primary);
+    }
+}
+
+
+.text {
+    &-error {
+        color: var(--error);
     }
 }
