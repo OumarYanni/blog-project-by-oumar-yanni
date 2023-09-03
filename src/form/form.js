@@ -37,7 +37,9 @@ const formIsValid = article => {
     if (
         !article.author ||
         !article.category ||
-        !article.content
+        !article.content ||
+        !article.img ||
+        !article.title
     ) {
         errors.push("Vous devez renseigner tous les champs")
     }
