@@ -1,3 +1,4 @@
+import { async } from "regenerator-runtime";
 import "./assets/styles/styles.scss";
 import "./index.scss";
 
@@ -26,6 +27,26 @@ const createArticles = articles => {
     });
     articleContainerElement.innerHTML = "";
     articleContainerElement.append(...articlesDOM);
+
+    
+    const deleteButtons = articleContainerElement.querySelectorAll(".btn-danger");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", async event => {
+            try {
+                const target = event.target;
+                const articleId = target.dataset.id;
+                const response = await fetch(`https://restapi.fr/api/article/${articleId}`,
+                {
+                    method: "DELETE"
+                });
+                const body = await response.json();
+                console.log(body);
+                fetchArticle();
+            } catch (e) {
+                console.log("e : ", e);
+            }
+        })
+    })
 };
 
 
