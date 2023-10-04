@@ -5,8 +5,13 @@ import "./form.scss";
 
 const form = document.querySelector("form");
 const errorElement = document.querySelector("#errors");
+const btnCancel = document.querySelector(".btn-secondary");
 let errors = [];
 
+
+btnCancel.addEventListener("click", () => {
+    window.location.assign("/index.html");
+});
 
 form.addEventListener("submit", async event => {
     event.preventDefault();
@@ -16,7 +21,7 @@ form.addEventListener("submit", async event => {
     if (formIsValid(article)) {
         try {
             const json = JSON.stringify(article);
-            const response = await fetch("https://restapi.fr/api/articles", {
+            const response = await fetch("https://restapi.fr/api/article", {
             method: "POST",
             body: json,
             headers: {
@@ -25,6 +30,10 @@ form.addEventListener("submit", async event => {
             });
             const body = await response.json();
             console.log(body);
+
+            if (response.status < 299) {
+                window.location.assign("/index.html");
+            }
         } catch (e) {
             console.error("e : ", e);
         }
@@ -42,6 +51,8 @@ const formIsValid = article => {
         !article.title
     ) {
         errors.push("Vous devez renseigner tous les champs")
+    } else {
+        errors = [];
     }
     if (article.content.length < 20) {
         errors.push("Le contenu de votre article est trop court !")
