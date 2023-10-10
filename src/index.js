@@ -5,10 +5,20 @@ import "./index.scss";
 
 const articleContainerElement = document.querySelector(".articles-container");
 const categoriesContainerElement = document.querySelector(".categories");
+let filter;
+let articles;
 
 
-const createArticles = articles => {
-    const articlesDOM = articles.map(article => {
+const createArticles = () => {
+    const articlesDOM = articles
+    .filter(article => {
+        if (filter) {
+            return article.category === filter;
+        } else {
+            return true;
+        }
+    }) 
+    .map(article => {
         const articleDOM = document.createElement("div");
         articleDOM.classList.add("article");
         articleDOM.innerHTML = `
@@ -77,7 +87,20 @@ const displayMenuCategories = categoriesArr => {
     const liElements = categoriesArr.map(categoryElem => {
         const li = document.createElement("li");
         li.innerHTML = `${categoryElem[0]} ( <strong>${categoryElem[1]}</strong> )`;
-        return li;
+        li.addEventListener("click", () => {
+            if (filter === categoryElem[0]) {
+                filter = null;
+                li.classList.remove("active");
+            } else {
+                filter = categoryElem[0];
+                liElements.forEach(li => {
+                    li.classList.remove("active");
+                });
+                li.classList.add("active");
+            }
+            createArticles();
+        });
+        return li
     });
 
     categoriesContainerElement.innerHTML = "";
@@ -85,7 +108,7 @@ const displayMenuCategories = categoriesArr => {
 };
 
 
-const createMenuCategories = articles => {
+const createMenuCategories = () => {
     const categories = articles.reduce((acc, article) => {
         if (acc[article.category]) {
             acc[article.category]++;
@@ -95,9 +118,12 @@ const createMenuCategories = articles => {
         return acc;
     }, {});
 
-    const categoriesArr = Object.keys(categories).map(category => {
+    const categoriesArr = Object.keys(categories)
+    .map(category => {
         return [category, categories[category]];
-    });
+    })
+    .sort((c1, c2) => c1[0].localeCompare(c2[0]));
+
     displayMenuCategories(categoriesArr);
 };
 
@@ -105,13 +131,13 @@ const createMenuCategories = articles => {
 const fetchArticle = async () => {
     try {
         const response = await fetch("https://restapi.fr/api/article");
-        let articles = await response.json();
+        articles = await response.json();
 
         if (!Array.isArray(articles)) {
             articles = [articles];
         }
-        createArticles(articles);
-        createMenuCategories(articles);
+        createArticles();
+        createMenuCategories();
     } catch (e) {
         console.log("e : ", e);
     }
