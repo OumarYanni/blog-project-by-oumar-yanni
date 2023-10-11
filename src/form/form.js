@@ -1,6 +1,7 @@
 import { async } from "regenerator-runtime";
 import "../assets/styles/styles.scss";
 import "./form.scss";
+import { openModal } from "../assets/javascripts/modal";
 
 
 const form = document.querySelector("form");
@@ -43,8 +44,11 @@ const fillForm = article => {
 
 };
 
-btnCancel.addEventListener("click", () => {
-    window.location.assign("/index.html");
+btnCancel.addEventListener("click", async () => {
+    const result = await openModal("Si vous quittez la page, vous allez perdre votre article");
+    if (result) {
+        window.location.assign("/index.html");
+    }
 });
 
 // When we edit, we don't create a new resource on the server.
